@@ -1,0 +1,13 @@
+Source: explorer-metrics
+Section: unknown
+Priority: optional
+Maintainer: pavel gusev <eilchenko@team.company.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: https://git.company.com/sre/explorer-metrics
+
+Package: explorer-metrics
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: explorer-metrics
+

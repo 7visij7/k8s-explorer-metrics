@@ -1,0 +1,8 @@
+spec: 
+  template:
+    spec: 
+      containers:
+      - name: app
+        image: ${REGISTRY}/${IMAGE_NAME}:${BUILD_ID}
+      - name: cronjob
+        image: ${REGISTRY}/${IMAGE_NAME}:${BUILD_ID}
