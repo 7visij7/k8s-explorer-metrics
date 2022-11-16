@@ -3,4 +3,3 @@ connexion
 tornado
 swagger-ui-bundle
 kubernetes
-company

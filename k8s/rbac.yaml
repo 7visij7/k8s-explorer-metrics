@@ -1,0 +1,52 @@
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metrics
+rules:
+- apiGroups: ["", "apps"] # "" indicates the core API group
+  resources: ["pods", "pods/log", "deployments"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: metrics
+  namespace: monitoring
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: metrics
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: metrics
+subjects:
+- kind: ServiceAccount
+  name: metrics
+  namespace: monitoring
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: deployer
+  namespace: monitoring
+rules:
+- apiGroups: ["", "apps"] # "" indicates the core API group
+  resources: ["pods", "pods/log", "deployments"]
+  verbs: ["get", "watch", "list", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: deployer
+  namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: deployer
+subjects:
+- kind: User
+  name: 'system:serviceaccount:default:deployer3000'

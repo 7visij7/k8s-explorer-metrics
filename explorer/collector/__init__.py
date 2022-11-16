@@ -20,7 +20,6 @@ def k8s_instance():
     configuration.api_key["authorization"] = get_bearer()
     configuration.api_key_prefix['authorization'] = 'Bearer' 
     configuration.host = os.environ['K8S_HOST']
-    #configuration.host = 'https://10.13.254.124:6443'
     configuration.ssl_ca_cert = '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
     v1 = client.CoreV1Api(client.ApiClient(configuration))
     return v1
